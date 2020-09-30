@@ -1,5 +1,9 @@
 package be.abis.exa1.model;
 
+import be.abis.exa1.utilities.FilesUtilities;
+import java.util.ArrayList;
+import java.util.List;
+
 public class Address {
     private String street;
     private String nr;
@@ -73,4 +77,12 @@ public class Address {
         }
         return isAZipCode;
     }
+
+    public void writeAddressToFile() {
+        List<String> lsSt = new ArrayList<>();
+        lsSt.add("Address " + street + " " + nr + " " + zipCode + " " + town + " " + country + " " + countryCode);
+        String fileName = "C:\\Users\\bruno\\IdeaProjects\\JavaTest\\ExA1\\src\\main\\resources\\address.txt";
+        FilesUtilities.writeToFile(lsSt, fileName);
+    }
+
 }

@@ -2,6 +2,7 @@ package be.abis.exa1.ut;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.startsWith;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 
@@ -56,10 +57,10 @@ public class TestPerson {
         String expected = "Person";
 
         //Act
-        String result = p1.toString().substring(0, 6);
+        String result = p1.toString();
 
         // Assert
-        assertThat(result, is(equalTo(expected)));
+        assertThat(result, startsWith(expected));
     }
 
     @Test(expected = PersonShouldBeAdultException.class)
