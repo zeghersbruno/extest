@@ -1,5 +1,6 @@
 package be.abis.exa1.model;
 
+import be.abis.exa1.exception.PersonShouldBeAdultException;
 import java.time.LocalDate;
 import java.time.Period;
 
