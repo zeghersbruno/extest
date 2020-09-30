@@ -1,6 +1,12 @@
 package be.abis.exa1.model;
 
 import be.abis.exa1.utilities.FilesUtilities;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -78,11 +84,15 @@ public class Address {
         return isAZipCode;
     }
 
-    public void writeAddressToFile() {
+    public void writeAddressToFile() throws IOException {
         List<String> lsSt = new ArrayList<>();
-        lsSt.add("Address " + street + " " + nr + " " + zipCode + " " + town + " " + country + " " + countryCode);
+        lsSt.add("\nAddress " + street + " " + nr + " " + zipCode + " " + town + " " + country + " " + countryCode);
         String fileName = "C:\\Users\\bruno\\IdeaProjects\\JavaTest\\ExA1\\src\\main\\resources\\address.txt";
-        FilesUtilities.writeToFile(lsSt, fileName);
+        Path pathToFile= Paths.get(fileName);
+        BufferedWriter writer = Files.newBufferedWriter(pathToFile, StandardOpenOption.APPEND);
+        for(String line: lsSt) {
+            writer.write(line);
+        }
     }
 
 }

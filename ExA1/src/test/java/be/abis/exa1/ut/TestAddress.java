@@ -8,8 +8,11 @@ import static org.hamcrest.CoreMatchers.equalTo;
 
 import be.abis.exa1.model.Address;
 import be.abis.exa1.validator.ReadAddressFromFile;
+import java.io.IOException;
+import java.nio.file.AccessDeniedException;
 import java.util.ArrayList;
 import java.util.List;
+import org.hamcrest.core.Every;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -29,7 +32,7 @@ public class TestAddress {
     }
 
     @Test
-    public void AddressShouldBeAddedInAFile() {
+    public void AddressShouldBeAddedInAFile() throws IOException {
         // Arrange
         Address ad = new Address("champagneStreet", "25", "5000", "Namur", "Belgium","BE");
         ad.writeAddressToFile();
@@ -41,7 +44,20 @@ public class TestAddress {
         lsAddress = readAddress.readAddress();
 
         // Assert
-        assertThat(lsAddress.get(0).toString(), startsWith(expected));
+        assertThat(lsAddress, Every.everyItem(startsWith(expected)));
+
+    }
+
+    // This test should be ignored as the file is write/read enabled
+    @Test(expected = IOException.class)
+    public void AddAddressShouldInAFileShouldGiveIOException() throws IOException {
+        // Arrange
+        Address ad = new Address("champagneStreet", "25", "5000", "Namur", "Belgium","BE");
+
+        // Act
+        ad.writeAddressToFile();
+
+        // Assert
 
     }
 }
