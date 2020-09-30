@@ -1,24 +1,20 @@
-package be.abis.exa1.ut;
+package ut;
 
-import static org.hamcrest.CoreMatchers.startsWith;
-import static org.junit.Assert.assertThat;
-import static org.junit.Assert.assertTrue;
-import static org.hamcrest.CoreMatchers.is;
+
 import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
 
-import be.abis.exa1.model.Address;
-import be.abis.exa1.validator.ReadAddressFromFile;
+import exb2.model.Address;
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.AccessDeniedException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Properties;
-import org.hamcrest.core.Every;
 import org.junit.Assert;
 import org.junit.Test;
+
 
 public class TestAddress {
 
@@ -34,7 +30,7 @@ public class TestAddress {
         boolean isAZipCode = ad.checkBelgianZipCode();
 
         // Assert
-        assertTrue("Zip Code is not correct", isAZipCode);
+        Assert.assertTrue("Zip Code is not correct", isAZipCode);
 
     }
 

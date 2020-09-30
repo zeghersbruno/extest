@@ -1,6 +1,5 @@
-package be.abis.exa1.model;
+package exb2.model;
 
-import be.abis.exa1.utilities.FilesUtilities;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
