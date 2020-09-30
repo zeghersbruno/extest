@@ -8,15 +8,22 @@ import static org.hamcrest.CoreMatchers.equalTo;
 
 import be.abis.exa1.model.Address;
 import be.abis.exa1.validator.ReadAddressFromFile;
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.AccessDeniedException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 import org.hamcrest.core.Every;
 import org.junit.Assert;
 import org.junit.Test;
 
 public class TestAddress {
+
+    private static String fileName = "C:\\Users\\bruno\\IdeaProjects\\JavaTest\\ExA1\\src\\main\\resources\\address.txt";
+    private static Path pathToFile = Paths.get(fileName);
 
     @Test
     public void BelgianZipCodeShouldBeNumeric() {
@@ -34,17 +41,21 @@ public class TestAddress {
     @Test
     public void AddressShouldBeAddedInAFile() throws IOException {
         // Arrange
-        Address ad = new Address("champagneStreet", "25", "5000", "Namur", "Belgium","BE");
-        ad.writeAddressToFile();
-        ReadAddressFromFile readAddress = new ReadAddressFromFile();
+        File myFile = new File(pathToFile.toString());
+        myFile.setWritable(true);
         List<String> lsAddress = new ArrayList<>();
-        String expected = "Address";
+        Address ad = new Address("champagneStreet", "25", "5000", "Namur", "Belgium","BE");
+        lsAddress = ad.readAddressFromFile();
+        int numberOfAddressesBefore = lsAddress.size();
+        int expected = numberOfAddressesBefore + 1;
 
         // Act
-        lsAddress = readAddress.readAddress();
+
+        ad.writeAddressToFile();
+        lsAddress = ad.readAddressFromFile();
 
         // Assert
-        assertThat(lsAddress, Every.everyItem(startsWith(expected)));
+        assertThat(lsAddress.size(), is(equalTo(expected)));
 
     }
 
@@ -52,12 +63,16 @@ public class TestAddress {
     @Test(expected = IOException.class)
     public void AddAddressShouldInAFileShouldGiveIOException() throws IOException {
         // Arrange
+        System.out.println(pathToFile.toString());
+        File myFile = new File(pathToFile.toString());
+        myFile.setReadOnly();
         Address ad = new Address("champagneStreet", "25", "5000", "Namur", "Belgium","BE");
 
         // Act
         ad.writeAddressToFile();
+        myFile.setWritable(true);
 
         // Assert
-
+        assertThat(myFile.canWrite(), is(true));
     }
 }

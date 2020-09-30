@@ -1,6 +1,7 @@
 package be.abis.exa1.model;
 
 import be.abis.exa1.utilities.FilesUtilities;
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -17,6 +18,8 @@ public class Address {
     private String town;
     private String country;
     private String countryCode;
+    private static String fileName = "C:\\Users\\bruno\\IdeaProjects\\JavaTest\\ExA1\\src\\main\\resources\\address.txt";
+    private static Path pathToFile = Paths.get(fileName);
 
     public Address(String street, String nr, String zipCode, String town, String country, String countryCode) {
         this.street = street;
@@ -87,12 +90,21 @@ public class Address {
     public void writeAddressToFile() throws IOException {
         List<String> lsSt = new ArrayList<>();
         lsSt.add("\nAddress " + street + " " + nr + " " + zipCode + " " + town + " " + country + " " + countryCode);
-        String fileName = "C:\\Users\\bruno\\IdeaProjects\\JavaTest\\ExA1\\src\\main\\resources\\address.txt";
-        Path pathToFile= Paths.get(fileName);
-        BufferedWriter writer = Files.newBufferedWriter(pathToFile, StandardOpenOption.APPEND);
+        BufferedWriter writer = Files.newBufferedWriter(pathToFile, StandardOpenOption.CREATE, StandardOpenOption.APPEND);
         for(String line: lsSt) {
             writer.write(line);
         }
+        writer.close();
+    }
+
+    public List<String> readAddressFromFile() throws IOException {
+        List<String> addresses = new ArrayList<>();
+        BufferedReader reader = Files.newBufferedReader(pathToFile);
+        while (reader.ready()) {
+            addresses.add(reader.readLine());
+            }
+        reader.close();
+        return addresses;
     }
 
 }
