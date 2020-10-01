@@ -1,21 +1,18 @@
-package ut;
+package be.abis.exc1.ut;
 
-
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.Assert.assertTrue;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.equalTo;
 
-import exb2.exception.PersonShouldBeAdultException;
-import exb2.model.Address;
+import be.abis.exc1.model.Address;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
-import org.junit.jupiter.api.Test;
-
+import org.junit.Test;
 
 public class TestAddress {
 
@@ -31,7 +28,7 @@ public class TestAddress {
         boolean isAZipCode = ad.checkBelgianZipCode();
 
         // Assert
-       assertThat(isAZipCode, is(true));
+        assertTrue("Zip Code is not correct", isAZipCode);
 
     }
 
@@ -57,8 +54,9 @@ public class TestAddress {
 
     }
 
-    @Test
-    public void addAddressShouldInAFileShouldGiveIOException() {
+    // This test should be ignored as the file is write/read enabled
+    @Test(expected = IOException.class)
+    public void addAddressShouldInAFileShouldGiveIOException() throws IOException {
         // Arrange
         System.out.println(pathToFile.toString());
         File myFile = new File(pathToFile.toString());
@@ -66,12 +64,10 @@ public class TestAddress {
         Address ad = new Address("champagneStreet", "25", "5000", "Namur", "Belgium","BE");
 
         // Act
-
+        ad.writeAddressToFile();
+        myFile.setWritable(true);
 
         // Assert
-        assertThrows(IOException.class, () -> {
-            ad.writeAddressToFile();
-        });
         assertThat(myFile.canWrite(), is(true));
     }
 }
