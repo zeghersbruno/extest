@@ -22,7 +22,11 @@ public class Person {
 
     public Person(int personNumber, String firstName, String lastName, LocalDate birthDay,
         Company company, double grossSalary) {
-        this(personNumber,firstName,lastName,birthDay, grossSalary);
+        this.personNumber = personNumber;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.birthDay = birthDay;
+        this.grossSalary = grossSalary;
         this.company = company;
     }
 
@@ -91,6 +95,7 @@ public class Person {
     }
 
     public double calculateNetSalary() {
-        return grossSalary - company.calculateTaxToPay();
+        double netSalary = grossSalary - (company.calculateTaxToPay()*grossSalary)/100;
+        return netSalary;
     }
 }

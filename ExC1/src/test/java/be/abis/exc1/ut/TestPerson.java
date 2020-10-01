@@ -5,9 +5,11 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.startsWith;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 import be.abis.exc1.exception.PersonShouldBeAdultException;
+import be.abis.exc1.model.Address;
 import be.abis.exc1.model.Company;
 import be.abis.exc1.model.Person;
 import be.abis.exc1.validator.ValidatePersonAge;
@@ -16,7 +18,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnitRunner;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -27,13 +28,15 @@ public class TestPerson  {
     ValidatePersonAge validator;
 
     @Mock
-    Company company;
+    private Company company;
+
+    @Mock
+    private Address address;
 
     @Before
         public void setUp() {
-        MockitoAnnotations.initMocks(this);
-        p1 = new Person(1,"Ann","Smits", LocalDate.of(1985, 6, 28),null, 2000);
-        p2 = new Person(2,"Neil","Yuong", LocalDate.of(2004, 6, 28),null, 1900);
+        p1 = new Person(1,"Ann","Smits", LocalDate.of(1985, 6, 28), company,2000);
+        p2 = new Person(2,"Neil","Yuong", LocalDate.of(2004, 6, 28), company, 1900);
     }
 
 
@@ -65,8 +68,10 @@ public class TestPerson  {
     public void toStringSentenceShouldStartsWithPerson() {
         // Arrange
         String expected = "Person";
+        when(company.getAddress()).thenReturn(address);
 
         //Act
+
         String result = p1.toString();
 
         // Assert
@@ -91,7 +96,7 @@ public class TestPerson  {
         // Arrange
         when(company.calculateTaxToPay()).thenReturn(51.0);
 
-        double expected = 1949.0;
+        double expected = 980;
 
         //Act
         double netSalary = p1.calculateNetSalary();
