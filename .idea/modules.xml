@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/ExA1/ExA1.iml" filepath="$PROJECT_DIR$/ExA1/ExA1.iml" />
       <module fileurl="file://$PROJECT_DIR$/ExB2/ExB2.iml" filepath="$PROJECT_DIR$/ExB2/ExB2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ExB3/ExB3.iml" filepath="$PROJECT_DIR$/ExB3/ExB3.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/JavaTest.iml" filepath="$PROJECT_DIR$/.idea/JavaTest.iml" />
     </modules>
   </component>

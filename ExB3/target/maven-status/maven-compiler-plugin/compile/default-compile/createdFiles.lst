@@ -1,0 +1,8 @@
+be\abis\exb3\model\Company.class
+be\abis\exb3\model\Address.class
+be\abis\exb3\test\ExB6.class
+be\abis\exb3\validator\ReadAddressFromFile.class
+be\abis\exb3\exception\PersonShouldBeAdultException.class
+be\abis\exb3\model\Person.class
+be\abis\exb3\utilities\FilesUtilities.class
+be\abis\exb3\validator\ValidatePersonAge.class
