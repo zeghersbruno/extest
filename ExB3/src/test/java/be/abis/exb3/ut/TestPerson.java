@@ -10,10 +10,11 @@ import be.abis.exb3.exception.PersonShouldBeAdultException;
 import be.abis.exb3.model.Person;
 import be.abis.exb3.validator.ValidatePersonAge;
 import java.time.LocalDate;
+import junit.framework.TestCase;
 import org.junit.Before;
 import org.junit.Test;
 
-public class TestPerson {
+public class TestPerson  {
 
     Person p1;
     Person p2;

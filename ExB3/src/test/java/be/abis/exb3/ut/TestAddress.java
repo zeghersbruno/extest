@@ -12,10 +12,11 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import junit.framework.TestCase;
 import org.junit.Ignore;
 import org.junit.Test;
 
-public class TestAddress {
+public class TestAddress  {
 
     private static String fileName = "C:\\Users\\bruno\\IdeaProjects\\JavaTest\\ExA1\\src\\main\\resources\\address.txt";
     private static Path pathToFile = Paths.get(fileName);
