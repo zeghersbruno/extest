@@ -1,0 +1,13 @@
+be\abis\exc3\model\Person.class
+be\abis\exc3\service\AbisPaymentServiceImpl.class
+be\abis\exc3\validator\ValidatePerson.class
+be\abis\exc3\utilities\FilesUtilities.class
+be\abis\exc3\validator\ReadAddressFromFile.class
+be\abis\exc3\service\AddressRepositoryFile.class
+be\abis\exc3\exception\SalaryTooLowException.class
+be\abis\exc3\service\PaymentService.class
+be\abis\exc3\exception\PersonShouldBeAdultException.class
+be\abis\exc3\model\Address.class
+be\abis\exc3\service\AddressRepository.class
+be\abis\exc3\model\Company.class
+be\abis\exc3\test\ExB6.class
