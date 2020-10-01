@@ -15,8 +15,8 @@ public class ExB6 {
         Address a = new Address("Diestsevest","32 bus 4B","3000","Leuven","Belgi�","BE");
         Company c = new Company("ABIS",a);
 
-        Person p1 = new Person(1,"Ann","Smits", LocalDate.of(1985, 6, 28),c);
-        Person p2 = new Person(2,"John","Doe",LocalDate.of(1967, 8, 10));
+        Person p1 = new Person(1,"Ann","Smits", LocalDate.of(1985, 6, 28),c, 2000);
+        Person p2 = new Person(2,"John","Doe",LocalDate.of(1967, 8, 10), 1900);
 
         try ( BufferedWriter bw = Files.newBufferedWriter(Paths.get("personinfo.txt"));){
             bw.write(p1.toString() + "\n");

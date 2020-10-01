@@ -9,16 +9,20 @@ public class Person {
     private String lastName;
     private LocalDate birthDay;
     private Company company;
+    private double grossSalary;
 
-    public Person(int personNumber, String firstName, String lastName, LocalDate birthDay) {
+    public Person(int personNumber, String firstName, String lastName, LocalDate birthDay,
+        double grossSalary) {
         this.personNumber = personNumber;
         this.firstName = firstName;
         this.lastName = lastName;
         this.birthDay = birthDay;
+        this.grossSalary = grossSalary;
     }
 
-    public Person(int personNumber, String firstName, String lastName, LocalDate birthDay, Company company) {
-        this(personNumber,firstName,lastName,birthDay);
+    public Person(int personNumber, String firstName, String lastName, LocalDate birthDay,
+        Company company, double grossSalary) {
+        this(personNumber,firstName,lastName,birthDay, grossSalary);
         this.company = company;
     }
 
@@ -62,6 +66,14 @@ public class Person {
         this.company = company;
     }
 
+    public double getGrossSalary() {
+        return grossSalary;
+    }
+
+    public void setGrossSalary(double grossSalary) {
+        this.grossSalary = grossSalary;
+    }
+
     @Override
     public String toString() {
         String text = "Person " + this.personNumber + ": " + this.firstName + " " +this.lastName + " (" +this.calculateAge()+ " years old)";
@@ -78,4 +90,7 @@ public class Person {
         return Period.between(birthDay, LocalDate.now()).getYears();
     }
 
+    public double calculateNetSalary() {
+        return grossSalary - company.calculateTaxToPay();
+    }
 }
