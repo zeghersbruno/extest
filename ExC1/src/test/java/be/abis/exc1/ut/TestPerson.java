@@ -6,13 +6,16 @@ import static org.hamcrest.CoreMatchers.startsWith;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import be.abis.exc1.exception.PersonShouldBeAdultException;
+import be.abis.exc1.exception.SalaryTooLowException;
 import be.abis.exc1.model.Address;
 import be.abis.exc1.model.Company;
 import be.abis.exc1.model.Person;
-import be.abis.exc1.validator.ValidatePersonAge;
+import be.abis.exc1.validator.ValidatePerson;
 import java.time.LocalDate;
 import org.junit.Before;
 import org.junit.Test;
@@ -25,7 +28,9 @@ public class TestPerson  {
 
     Person p1;
     Person p2;
-    ValidatePersonAge validator;
+    Person p3;
+
+    ValidatePerson validator;
 
     @Mock
     private Company company;
@@ -37,6 +42,7 @@ public class TestPerson  {
         public void setUp() {
         p1 = new Person(1,"Ann","Smits", LocalDate.of(1985, 6, 28), company,2000);
         p2 = new Person(2,"Neil","Yuong", LocalDate.of(2004, 6, 28), company, 1900);
+        p3 = new Person(3,"Game","Over", LocalDate.of(2000, 6, 28), company, 1550);
     }
 
 
@@ -81,7 +87,7 @@ public class TestPerson  {
     @Test(expected = PersonShouldBeAdultException.class)
     public void PersonShouldBeAdultException() throws PersonShouldBeAdultException {
         // Arrange
-        validator = new ValidatePersonAge();
+        validator = new ValidatePerson();
 
         //Act
         int age = p2.calculateAge();
@@ -95,7 +101,6 @@ public class TestPerson  {
     public void calculateNetSalaryOfBelgianPersonUsingMockCompany() {
         // Arrange
         when(company.calculateTaxToPay()).thenReturn(51.0);
-
         double expected = 980;
 
         //Act
@@ -104,7 +109,21 @@ public class TestPerson  {
 
         // Assert
         assertThat(netSalary, is(equalTo(expected)));
+        verify(company, times(1)).calculateTaxToPay();
 
+    }
+
+    @Test(expected = SalaryTooLowException.class)
+    public void aPersonShouldHaveANetSalaryGreatherThan1500() throws SalaryTooLowException {
+        // Arrange
+        validator = new ValidatePerson();
+        when(company.calculateTaxToPay()).thenReturn(51.0);
+
+        // act
+        double netSalary = p3.calculateNetSalary();
+        validator.validateNetSalary(netSalary);
+
+        // assert
 
     }
 
